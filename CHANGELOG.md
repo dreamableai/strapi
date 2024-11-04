@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/nuxt-modules/strapi/compare/v1.12.0...v2.0.0) (2024-11-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* **composables:** remove deprecated wrappers
+* **module:** default version to `v5` (#436)
+
+### Features
+
+* **composables:** remove deprecated wrappers ([a05a8c8](https://github.com/nuxt-modules/strapi/commit/a05a8c8e15ddd840d9b983713c3a3e973dc28d03))
+* **module:** handle `v5` ([#424](https://github.com/nuxt-modules/strapi/issues/424)) ([b8949e5](https://github.com/nuxt-modules/strapi/commit/b8949e58e0cad5ad1a97d7b3c5e3a99b3a8b7bf0))
+
+
+### Bug Fixes
+
+* **module:** default version to `v5` ([#436](https://github.com/nuxt-modules/strapi/issues/436)) ([f53bdf9](https://github.com/nuxt-modules/strapi/commit/f53bdf9c18123c5c26add33a81f9dab7f598a7ef))
+* **v5:** `locale` type can be `null` ([#437](https://github.com/nuxt-modules/strapi/issues/437)) ([03627d8](https://github.com/nuxt-modules/strapi/commit/03627d85c91533cbd5ffa0427d7717bd387a5b7d))
+
 ## [1.12.0](https://github.com/nuxt-modules/strapi/compare/v1.11.0...v1.12.0) (2024-04-02)
 
 
