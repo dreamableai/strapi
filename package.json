@@ -2,7 +2,10 @@
   "name": "@nuxtjs/strapi",
   "version": "2.0.0",
   "description": "Strapi module for Nuxt",
-  "repository": "nuxt-modules/strapi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuxt-modules/strapi.git"
+  },
   "license": "MIT",
   "exports": {
     ".": {
