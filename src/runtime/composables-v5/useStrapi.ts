@@ -1,5 +1,4 @@
 import type { FetchOptions } from 'ofetch'
-
 import type { Strapi5ResponseSingle, Strapi5RequestParams, Strapi5ResponseMany } from '../types/v5'
 import { useStrapiClient } from '#imports'
 
