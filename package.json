@@ -52,6 +52,7 @@
     "access": "public"
   },
   "resolutions": {
-    "@nuxtjs/strapi": "workspace:*"
+    "@nuxtjs/strapi": "workspace:*",
+    "typescript": "5.6.3"
   }
 }
