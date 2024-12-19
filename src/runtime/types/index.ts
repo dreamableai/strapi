@@ -570,6 +570,22 @@ export interface StrapiGraphqlVariables {
   [variable: string]: unknown
 }
 
+export type StrapiRequestParamField<T> = {
+  [K in keyof T]: T[K] extends object
+    ? never
+    : K;
+}[keyof T]
+
+export type StrapiRequestParamSort<T> = `${Exclude<keyof T, symbol>}${':asc' | ':desc' | ''}`
+
+export type StrapiRequestParamPopulate<T> = {
+  [K in keyof T]: T[K] extends object
+    ? T[K] extends Array<infer I>
+      ? `${Exclude<K, symbol>}` | `${Exclude<K, symbol>}.${StrapiRequestParamPopulate<I>}`
+      : `${Exclude<K, symbol>}` | `${Exclude<K, symbol>}.${StrapiRequestParamPopulate<T[K]>}`
+    : never;
+}[keyof T]
+
 export * from './v3'
 export * from './v4'
 export * from './v5'

@@ -3,8 +3,8 @@ import type { Strapi4ResponseSingle, Strapi4RequestParams, Strapi4ResponseMany }
 import { useStrapiClient } from '#imports'
 
 interface StrapiV4Client<T> {
-  find<F = T>(contentType: string, params?: Strapi4RequestParams): Promise<Strapi4ResponseMany<F>>
-  findOne<F = T>(contentType: string, id?: string | number | Strapi4RequestParams, params?: Strapi4RequestParams): Promise<Strapi4ResponseSingle<F>>
+  find<F = T>(contentType: string, params?: Strapi4RequestParams<F>): Promise<Strapi4ResponseMany<F>>
+  findOne<F = T>(contentType: string, id?: string | number | Strapi4RequestParams<F>, params?: Strapi4RequestParams<F>): Promise<Strapi4ResponseSingle<F>>
   create<F = T>(contentType: string, data: Partial<F>): Promise<Strapi4ResponseSingle<F>>
   update<F = T>(contentType: string, id: string | number | Partial<F>, data?: Partial<F>): Promise<Strapi4ResponseSingle<F>>
   delete<F = T>(contentType: string, id?: string | number): Promise<Strapi4ResponseSingle<F>>
@@ -20,7 +20,7 @@ export const useStrapi = <T>(): StrapiV4Client<T> => {
    * @param  {Strapi4RequestParams} [params] - Query parameters
    * @returns Promise<T>
    */
-  const find = <T>(contentType: string, params?: Strapi4RequestParams, fetchOptions?: FetchOptions): Promise<Strapi4ResponseMany<T>> => {
+  const find = <T>(contentType: string, params?: Strapi4RequestParams<T>, fetchOptions?: FetchOptions): Promise<Strapi4ResponseMany<T>> => {
     return client(`/${contentType}`, { method: 'GET', params, ...fetchOptions })
   }
 
@@ -32,7 +32,7 @@ export const useStrapi = <T>(): StrapiV4Client<T> => {
    * @param  {Strapi4RequestParams} [params] - Query parameters
    * @returns Promise<T>
    */
-  const findOne = <T>(contentType: string, id?: string | number | Strapi4RequestParams, params?: Strapi4RequestParams, fetchOptions?: FetchOptions): Promise<Strapi4ResponseSingle<T>> => {
+  const findOne = <T>(contentType: string, id?: string | number | Strapi4RequestParams<T>, params?: Strapi4RequestParams<T>, fetchOptions?: FetchOptions): Promise<Strapi4ResponseSingle<T>> => {
     if (typeof id === 'object') {
       params = id
       id = undefined
