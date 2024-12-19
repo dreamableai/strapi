@@ -15,7 +15,7 @@ export interface Strapi5RequestParams {
   sort?: string | Array<string>
   pagination?: PaginationByOffset | PaginationByPage
   filters?: Record<string, unknown>
-  publicationState?: 'live' | 'preview'
+  status?: 'published' | 'draft'
   locale?: StrapiLocale | null
 }
 
