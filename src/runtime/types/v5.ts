@@ -1,4 +1,4 @@
-import type { MetaResponsePaginationByOffset, MetaResponsePaginationByPage, PaginationByOffset, PaginationByPage, StrapiLocale, StrapiRequestParamField, StrapiRequestParamPopulate, StrapiRequestParamSort } from '.'
+import type { MetaResponsePaginationByOffset, MetaResponsePaginationByPage, PaginationByOffset, PaginationByPage, StrapiLocale, StrapiRequestParamField, StrapiRequestParamPopulate, StrapiRequestParamSort, StrapiFilterRequestParam } from '.'
 
 export interface Strapi5Error {
   error: {
@@ -14,7 +14,7 @@ export interface Strapi5RequestParams<T> {
   populate?: Strapi5RequestPopulateParam<T>
   sort?: StrapiRequestParamSort<T> | Array<StrapiRequestParamSort<T>>
   pagination?: PaginationByOffset | PaginationByPage
-  filters?: Record<string, unknown>
+  filters?: StrapiFilterRequestParam<T>
   status?: 'published' | 'draft'
   locale?: StrapiLocale | null
 }

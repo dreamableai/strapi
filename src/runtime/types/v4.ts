@@ -1,4 +1,4 @@
-import type { StrapiLocale, StrapiRequestParamField, StrapiRequestParamPopulate, StrapiRequestParamSort } from '.'
+import type { StrapiFilterRequestParam, StrapiLocale, StrapiRequestParamField, StrapiRequestParamPopulate, StrapiRequestParamSort } from '.'
 
 export interface Strapi4Error {
   error: {
@@ -26,7 +26,7 @@ export interface Strapi4RequestParams<T> {
   populate?: Strapi4RequestPopulateParam<T>
   sort?: StrapiRequestParamSort<T> | Array<StrapiRequestParamSort<T>>
   pagination?: PaginationByOffset | PaginationByPage
-  filters?: Record<string, unknown>
+  filters?: StrapiFilterRequestParam<T>
   publicationState?: 'live' | 'preview'
   locale?: StrapiLocale
 }

@@ -29,15 +29,10 @@ export const useStrapi = <T>(): StrapiV5Client<T> => {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string} documentId - ID of entry
-   * @param  {Strapi5RequestParams<T>} [params] - Query parameters
+   * @param  {Omit<Strapi5RequestParams<T>, 'filter'>} [params] - Query parameters
    * @returns Promise<T>
    */
-  const findOne = <T>(contentType: string, documentId?: string | Strapi5RequestParams<T>, params?: Strapi5RequestParams<T>, fetchOptions?: FetchOptions): Promise<Strapi5ResponseSingle<T>> => {
-    if (typeof documentId === 'object') {
-      params = documentId
-      documentId = undefined
-    }
-
+  const findOne = <T>(contentType: string, documentId: string, params?: Omit<Strapi5RequestParams<T>, 'filter'>, fetchOptions?: FetchOptions): Promise<Strapi5ResponseSingle<T>> => {
     const path = [contentType, documentId].filter(Boolean).join('/')
 
     return client(path, { method: 'GET', params, ...fetchOptions })
@@ -48,10 +43,10 @@ export const useStrapi = <T>(): StrapiV5Client<T> => {
    *
    * @param  {string} contentType - Content type's name pluralized
    * @param  {Record<string, any>} data - Form data
-   * @param  {Strapi5RequestParams<T>} [params] - Query parameters
+   * @param  {Omit<Strapi5RequestParams<T>, 'filter'>} [params] - Query parameters
    * @returns Promise<T>
    */
-  const create = <T>(contentType: string, data: Partial<T>, params: Strapi5RequestParams<T> = {}): Promise<Strapi5ResponseSingle<T>> => {
+  const create = <T>(contentType: string, data: Partial<T>, params: Omit<Strapi5RequestParams<T>, 'filter'> = {}): Promise<Strapi5ResponseSingle<T>> => {
     return client(`/${contentType}`, { method: 'POST', body: { data }, params })
   }
 
@@ -61,10 +56,10 @@ export const useStrapi = <T>(): StrapiV5Client<T> => {
    * @param  {string} contentType - Content type's name pluralized
    * @param  {string} documentId - ID of entry to be updated
    * @param  {Record<string, any>} data - Form data
-   * @param  {Strapi5RequestParams<T>} [params] - Query parameters
+   * @param  {Omit<Strapi5RequestParams<T>, 'filter'>} [params] - Query parameters
    * @returns Promise<T>
    */
-  const update = <T>(contentType: string, documentId: string | Partial<T>, data?: Partial<T>, params: Strapi5RequestParams<T> = {}): Promise<Strapi5ResponseSingle<T>> => {
+  const update = <T>(contentType: string, documentId: string | Partial<T>, data?: Partial<T>, params: Omit<Strapi5RequestParams<T>, 'filter'> = {}): Promise<Strapi5ResponseSingle<T>> => {
     if (typeof documentId === 'object') {
       data = documentId
       documentId = undefined

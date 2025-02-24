@@ -586,6 +586,45 @@ export type StrapiRequestParamPopulate<T> = {
     : never;
 }[keyof T]
 
+// General operator type for primitive values (string, number, boolean)
+export type StrapiPrimitiveOperators<T> =
+  | { $eq: T } // Equal to a value
+  | { $ne: T } // Not equal to a value
+  | { $in: T[] } // Included in an array of values
+  | { $notIn: T[] } // Not included in an array of values
+  | { $null: boolean } // Is null
+  | { $notNull: boolean } // Is not null
+  | { $or: StrapiFilterRequestParam<T>[] } // "Or" condition
+  | { $and: StrapiFilterRequestParam<T>[] } // "And" condition
+  | { $not: StrapiFilterRequestParam<T> } // "Not" condition
+
+// String-specific operators
+export type StrapiStringOperators =
+  | { $eqi: string } // Equal (case-insensitive)
+  | { $contains: string } // Contains a substring
+  | { $notContains: string } // Does not contain a substring
+  | { $containsi: string } // Contains a substring (case-insensitive)
+  | { $notContainsi: string } // Does not contain a substring (case-insensitive)
+  | { $startsWith: string } // Starts with a substring
+  | { $startsWithi: string } // Starts with a substring (case-insensitive)
+  | { $endsWith: string } // Ends with a substring
+  | { $endsWithi: string } // Ends with a substring (case-insensitive)
+
+// Numeric-specific operators
+export type StrapiNumberOperators =
+  | { $lt: number } // Less than a value
+  | { $lte: number } // Less than or equal to a value
+  | { $gt: number } // Greater than a value
+  | { $gte: number } // Greater than or equal to a value
+  | { $between: [number, number] } // Is between two values
+
+// Base type for filters
+export type StrapiFilterRequestParam<T> = T extends object
+  ? {
+      [K in keyof T]?: StrapiFilterRequestParam<T[K]>; // Nested filtering for objects
+    }
+  : StrapiPrimitiveOperators<T> | (T extends string ? StrapiStringOperators : T extends number ? StrapiNumberOperators : never) // Apply operators based on field type
+
 export * from './v3'
 export * from './v4'
 export * from './v5'
